@@ -1,0 +1,26 @@
+<!--home.html-->
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% for blog in page_posts %}
+    <h1><a href="{% url 'detail' blog.id %}">제목 : {{blog.title}}</a></h1>
+{% endfor %}
+
+<ul>
+    {% if page_posts.has_previous %}
+        <li><a href="?page={{page_posts.previous_page_number}}">이전</a></li>
+    {% endif %}
+
+    {% for i in page_posts.paginator.page_range %}
+        <li><a href="?page={{i}}">{{i}}</a></li>
+    {% endfor %}
+
+    {% if page_posts.has_next %}
+        <li><a href="?page={{page_posts.next_page_number}}">다음</a></li>
+    {% endif %}
+
+</ul>
+
+{% endblock %}
